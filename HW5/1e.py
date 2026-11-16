@@ -12,7 +12,7 @@ def tokamak(t, v, p, q):
 p, q = 100, 1/4
 v0 = 1,1
 t_span = (0, 30)
-t_eval = np.linspace(*t_span, 5000)
+t_eval = np.linspace(*t_span, 50000)
 params = p, q
 
 sol = solve_ivp(
@@ -23,8 +23,19 @@ sol = solve_ivp(
 )
 # print(sol.status, sol.message)
 
-plt.plot(sol.t, sol.y[0])
-plt.xlabel('t')
-plt.ylabel('x(t)')
-plt.suptitle(rf'1e: Sawtooth Oscillations ($\rho = {p}$)')
+fig = plt.figure(figsize=(12,5))
+
+ax1 = fig.add_subplot(1,2,1)   
+ax1.plot(sol.t, sol.y[0])
+ax1.set_xlabel('t')
+ax1.set_ylabel('x(t)')
+ax1.set_title(rf'Sawtooth Oscillations')
+
+ax2 = fig.add_subplot(1,2,2)
+ax2.plot(sol.y[0], sol.y[1])
+ax2.set_xlabel('x(t)')
+ax2.set_ylabel('y(t)')
+ax2.set_title(rf'Phase Portrait')
+
+fig.suptitle(rf"1e: Tomalak ($\rho = {p}$)")
 plt.show()
