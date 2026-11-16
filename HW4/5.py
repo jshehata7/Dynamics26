@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
+# Two Rossler Chaotic Systems
 def system(t, s, a, b, c):
     xD, yD, zD, xR, yR, zR = s
 
